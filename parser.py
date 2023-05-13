@@ -23,6 +23,14 @@ JOB_FIELDS = [field.name for field in fields(Job)]
 
 
 def salary_to_avg_int(salary_str: str) -> int:
+    """
+    Converts a salary string in the format '$XX,XXX - $YY,YYY' or '$ZZZ,ZZZ' to an integer
+    representing the average salary.
+
+    :param salary_str: A salary string in the format '$XX,XXX - $YY,YYY' or '$ZZZ,ZZZ'.
+    :return int: The average salary as an integer.
+    :raise ValueError: If the input string is not in a valid format.
+    """
     salary_str = salary_str.replace("$", "").replace(",", "").replace(" ", "")
     if "-" in salary_str:
         min_salary, max_salary = salary_str.split("-")
@@ -34,6 +42,15 @@ def salary_to_avg_int(salary_str: str) -> int:
 
 
 async def get_job_info(session: aiohttp.ClientSession, url: str) -> Job:
+    """
+    Fetches job information from a given URL using an aiohttp session.
+
+    :param session: An aiohttp ClientSession object to use for making HTTP requests.
+
+    :param url: The URL of the job posting to fetch.
+    :return Job: A Job object representing the job information fetched from the URL.
+    :raise Exception: If there is an error fetching or parsing the job information.
+    """
     async with session.get(urljoin(URL, url), ssl=False) as response:
         soup = BeautifulSoup(await response.text(), "html.parser")
 
@@ -63,6 +80,12 @@ async def get_job_info(session: aiohttp.ClientSession, url: str) -> Job:
 
 
 async def parser() -> list[Job]:
+    """
+    Parses job information from multiple pages of job postings and returns a list of Job objects.
+
+    :return List[Job]: A list of Job objects representing the job information parsed from the job postings.
+    :raise Exception: If there is an error fetching or parsing the job information.
+    """
     page_url = "?primary_keyword=Python&page=1"
     job_urls = []
 
@@ -84,6 +107,13 @@ async def parser() -> list[Job]:
 
 
 def write_to_csv(job_list: list[Job], csv_path: str) -> None:
+    """
+    Writes the list of job objects to a CSV file at the specified path.
+
+    :param job_list: A list of Job objects.
+    :param csv_path: The path to the output CSV file.
+    :return: None
+    """
     with open(csv_path, "w") as file:
         writer = csv.writer(file)
         writer.writerow(JOB_FIELDS)
