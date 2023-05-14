@@ -22,6 +22,11 @@ pip install -r requirements.txt
 python parser.py
 jupyter notebook
 ```
+# Top 15 Technologies
 ![img.png](img.png)
+# Top 10 Job Locations
 ![img_1.png](img_1.png)
+# Number of Jobs per Company
 ![img_2.png](img_2.png)
+# Average Salary by Country
+![img_3.png](img_3.png)
