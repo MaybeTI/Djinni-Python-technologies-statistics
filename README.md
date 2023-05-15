@@ -28,5 +28,5 @@ jupyter notebook
 ![img_1.png](img_1.png)
 # Number of Jobs per Company
 ![img_2.png](img_2.png)
-# Average Salary by Country
+# Average Salary by Country (in USD)
 ![img_3.png](img_3.png)

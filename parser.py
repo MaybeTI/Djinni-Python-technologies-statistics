@@ -1,11 +1,11 @@
-import csv
 import asyncio
+import csv
 import re
 from dataclasses import dataclass, fields, astuple
+from urllib.parse import urljoin
 
 import aiohttp
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 
 URL = "https://djinni.co/jobs/"
 
@@ -46,7 +46,6 @@ async def get_job_info(session: aiohttp.ClientSession, url: str) -> Job:
     Fetches job information from a given URL using an aiohttp session.
 
     :param session: An aiohttp ClientSession object to use for making HTTP requests.
-
     :param url: The URL of the job posting to fetch.
     :return Job: A Job object representing the job information fetched from the URL.
     :raise Exception: If there is an error fetching or parsing the job information.
